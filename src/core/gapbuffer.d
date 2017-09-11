@@ -32,7 +32,7 @@ import std.utf: byDchar;
 
  Some functions have a "fast path" that operate by chars and a "slow path" that
  operate by graphemes. The path is selected by the hasCombiningGraphemes member that
- is updated every time text is added to the buffer to the array is reallocated
+ is updated every time text is added to the buffer or the array is reallocated
  (currently no check is done when deleting characters for performance reasons).
 */
 
@@ -782,7 +782,7 @@ struct GapBuffer
             _newLinesDirty = false;
 
         ArrayIdx nlIndex;
-        // For calculating the average lenth, used to optimize currentLine():
+        // For calculating the average line length, to optimize currentLine():
         ArraySize linesLengthSum;
         ArrayIdx prevOffset;
         bool afterGap = false;
@@ -817,6 +817,8 @@ struct GapBuffer
 
         _averageLineLenCP = _newLines.length > 0 ? linesLengthSum / nlIndex : contentCPLen;
     }
+
+    // TODO: iterator by line
 
     // TODO: fuzzy test this
     /**

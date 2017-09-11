@@ -6,17 +6,16 @@
 	"description": "Some day this will be an editor",
 	"copyright": "Copyright © 2017, Juan Jose Alvarez Martinez",
 	"license": "GPL3",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"buildTypes": {},
 	"targetType": "executable",
-	"mainSourceFile": "source/app.d",
-    "importPaths": ["source", "source/core", "source/util"],
-    "sourcePaths": ["source", "source/core", "source/util"],
-    "stringImportPaths": ["source/core"],
+	"mainSourceFile": "src/app.d",
+    "importPaths": ["src", "src/core"],
+    "sourcePaths": ["src", "src/core"],
+    "stringImportPaths": ["src/core"],
 	"subPackages": [],
-	"excludedSourceFiles": ["source/core/discarded.d", "source/core/exploratory/*"],
-	"dependencies": {
-	},
+	"excludedSourceFiles": ["src/core/discarded.d", "src/core/exploratory/*",
+	                        "src/frontend/repl/app.d"],
 	"configurations": [
         { 
             "name": "debug"
@@ -46,7 +45,14 @@
         },
         {
             "name": "optimizeddmd",
-            "targetType": "executable",
+            "targetType": "executable"
         },
+        {
+            "name": "repl",
+            "targetType": "executable",
+            "sourcePaths": ["src/core", "src/frontend/repl"],
+            "importPaths": ["src/core"],
+            "excludedSourceFiles": ["src/app.d"],
+        }
     ]
 }
